@@ -1,0 +1,32 @@
+---
+- name: Update system packages
+  apt:
+    update_cache: yes
+    upgrade: dist
+
+- name: Install common packages
+  apt:
+    name: "{{ common_packages }}"
+    state: present
+  vars:
+    common_packages:
+      - htop
+      - nano
+      - unzip
+
+- name: Create common directory structure
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ app_user }}"
+    group: "{{ app_group }}"
+    mode: "{{ app_mode }}"
+  with_items:
+    - "{{ app_path }}/logs"
+    - "{{ app_path }}/backups"
+
+- name: Configure timezone
+  timezone:
+    name: "{{ timezone }}"
+
+- include: config.yml

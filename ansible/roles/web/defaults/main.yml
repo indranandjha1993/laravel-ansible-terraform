@@ -1,0 +1,10 @@
+---
+app_name: myapp
+app_env: prod
+app_debug: false
+app_url: 'http://{{ ansible_fqdn }}'
+
+server_name: '{{ ansible_fqdn }}'
+server_root: '/var/www/{{ app_name }}'
+
+git_version: 'master'

@@ -1,0 +1,26 @@
+---
+# Web role deploy tasks
+
+- name: Checkout latest version from git
+  git:
+    repo: git@github.com:myusername/myapp.git
+    dest: /var/www/myapp
+    version: "{{ git_version }}"
+    force: yes
+    update: yes
+    accept_hostkey: yes
+
+- name: Install composer dependencies
+  composer:
+    command: install
+    working_dir: /var/www/myapp
+    prefer_dist: yes
+    no_interaction: true
+
+- name: Run database migrations
+  command: php /var/www/myapp/artisan migrate
+  become: true
+
+- name: Clear the cache
+  command: php /var/www/myapp/artisan cache:clear
+  become: true

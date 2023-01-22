@@ -1,0 +1,5 @@
+---
+git_user: deploy
+git_email: deploy@example.com
+git_branch: master
+git_remote: origin

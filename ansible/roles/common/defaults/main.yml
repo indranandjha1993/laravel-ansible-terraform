@@ -1,0 +1,14 @@
+---
+# Common role defaults
+
+# General app config
+app_name: "My App"
+app_version: "1.0"
+app_env: "development"
+
+# Operating system specific variables
+os_family: "{{ ansible_os_family }}"
+
+# Other config
+debug: true
+log_level: "debug"

@@ -1,0 +1,17 @@
+---
+# Common role variables
+
+# General app config
+app_name: "My App"
+app_version: "1.0"
+app_env: "production"
+
+# Database config
+db_host: "localhost"
+db_name: "my_app_db"
+db_user: "my_app_user"
+db_password: "my_app_password"
+
+# Other config
+debug: false
+log_level: "info"

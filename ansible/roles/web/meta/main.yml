@@ -1,0 +1,7 @@
+---
+dependencies:
+  - { role: common }
+
+author: Indra Nand Jha
+
+min_ansible_version: 2.9

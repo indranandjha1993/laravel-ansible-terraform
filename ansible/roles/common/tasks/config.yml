@@ -1,0 +1,54 @@
+---
+- name: Install PHP and required modules
+  apt:
+    name: "{{ php_packages }}"
+    state: present
+  vars:
+    php_packages:
+      - php7.4-fpm
+      - php7.4-common
+      - php7.4-mbstring
+      - php7.4-xml
+      - php7.4-curl
+      - php7.4-gd
+      - php7.4-mysql
+
+- name: Configure PHP
+  template:
+    src: php.ini.j2
+    dest: /etc/php/7.4/fpm/php.ini
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Configure PHP-FPM
+  template:
+    src: www.conf.j2
+    dest: /etc/php/7.4/fpm/pool.d/www.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Install and configure Nginx
+  apt:
+    name: nginx
+    state: present
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart nginx
+
+- name: Restart services
+  service:
+    name: "{{ item }}"
+    state: restarted
+  with_items:
+    - php7.4-fpm
+    - nginx
+  handlers:
+    - name: restart nginx
+      service: name=nginx state=restarted

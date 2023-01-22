@@ -1,0 +1,30 @@
+---
+- name: Deploy Laravel application
+  hosts: all
+  vars:
+    app_path: /var/www/laravel
+    composer_path: /usr/local/bin/composer
+    php_path: /usr/bin/php
+  tasks:
+  - name: Checkout latest code
+    git:
+      repo: git@github.com:username/laravel-app.git
+      dest: "{{ app_path }}"
+      version: master
+      force: yes
+  - name: Install composer dependencies
+    command: "{{ composer_path }} install --no-dev"
+    args:
+      chdir: "{{ app_path }}"
+  - name: Run migrations
+    command: "{{ php_path }} {{ app_path }}/artisan migrate"
+  - name: Clear cache
+    command: "{{ php_path }} {{ app_path }}/artisan cache:clear"
+  - name: Restart PHP-FPM
+    service:
+      name: php7.4-fpm
+      state: restarted
+  - name: Reload nginx
+    service:
+      name: nginx
+      state: reloaded

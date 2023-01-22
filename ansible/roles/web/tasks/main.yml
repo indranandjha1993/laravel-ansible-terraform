@@ -1,0 +1,36 @@
+---
+# Web role tasks
+
+- name: Install Nginx
+  become: true
+  apt:
+    name: nginx
+    state: present
+
+- name: Start Nginx service
+  become: true
+  service:
+    name: nginx
+    state: started
+    enabled: true
+
+- name: Copy Nginx config
+  become: true
+  template:
+    src: templates/nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+    mode: 0644
+
+- name: Create web root directory
+  become: true
+  file:
+    path: /var/www/myapp
+    state: directory
+    mode: 0755
+
+- name: Copy app files
+  become: true
+  synchronize:
+    src: files/
+    dest: /var/www/myapp
+    mode: 0644

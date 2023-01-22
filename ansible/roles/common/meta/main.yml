@@ -1,0 +1,10 @@
+---
+# Common role metadata
+
+dependencies:
+  - { role: web }
+  - { role: database }
+
+author: Indra Nand Jha
+
+min_ansible_version: 2.9

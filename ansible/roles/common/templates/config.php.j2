@@ -1,0 +1,32 @@
+<?php
+
+return [
+    'app_name' => '{{ app_name }}',
+    'timezone' => '{{ timezone }}',
+    'locale' => '{{ locale }}',
+    'debug' => {{ debug }},
+    'url' => '{{ app_url }}',
+    'db' => [
+        'driver' => '{{ db_driver }}',
+        'host' => '{{ db_host }}',
+        'port' => '{{ db_port }}',
+        'database' => '{{ db_name }}',
+        'username' => '{{ db_user }}',
+        'password' => '{{ db_password }}',
+        'charset' => '{{ db_charset }}',
+        'collation' => '{{ db_collation }}',
+        'prefix' => '{{ db_prefix }}',
+        'strict' => {{ db_strict }},
+    ],
+    'mail' => [
+        'driver' => '{{ mail_driver }}',
+        'host' => '{{ mail_host }}',
+        'port' => '{{ mail_port }}',
+        'username' => '{{ mail_username }}',
+        'password' => '{{ mail_password }}',
+    ],
+    'log' => [
+        'level' => '{{ log_level }}',
+        'path' => storage_path('logs/laravel.log'),
+    ],
+];
