@@ -1,0 +1,11 @@
+aws_region = "us-west-2"
+vpc_cidr = "10.0.0.0/16"
+web_subnet_cidr = "10.0.0.0/24"
+web_subnet_az = "us-west-2a"
+allowed_ssh_cidr = ["0.0.0.0/0"]
+ami_id = "ami-01234567890abcdef0"
+instance_type = "t2.micro"
+key_name = "my_key_pair"
+min_size = 1
+max_size = 5
+desired_capacity = 2
